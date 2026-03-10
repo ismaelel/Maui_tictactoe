@@ -1,4 +1,4 @@
-﻿namespace Maui_tictactoe; // Vérifie bien ton namespace
+﻿namespace Maui_tictactoe.Models; // Vérifie bien ton namespace
 
 public class Plateau
 {
