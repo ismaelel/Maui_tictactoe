@@ -1,4 +1,4 @@
-﻿namespace Maui_tictactoe;
+﻿namespace Maui_tictactoe.Models;
 
 public class Jeu
 {

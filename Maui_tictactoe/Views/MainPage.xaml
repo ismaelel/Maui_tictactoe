@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Maui_tictactoe.ViewModels"
+             x:Class="Maui_tictactoe.MainPage">
+
+    <ContentPage.BindingContext>
+        <vm:JeuViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="30" Spacing="25" HorizontalOptions="Center" VerticalOptions="Center">
+
+        <Label Text="{Binding StatutTexte}"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+        <Grid RowDefinitions="100, 100, 100"
+              ColumnDefinitions="100, 100, 100"
+              RowSpacing="5" ColumnSpacing="5"
+              HorizontalOptions="Center">
+
+            <Button Grid.Row="0" Grid.Column="0" FontSize="36" Text="{Binding Cases[0].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[0]}" />
+            <Button Grid.Row="0" Grid.Column="1" FontSize="36" Text="{Binding Cases[1].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[1]}" />
+            <Button Grid.Row="0" Grid.Column="2" FontSize="36" Text="{Binding Cases[2].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[2]}" />
+
+            <Button Grid.Row="1" Grid.Column="0" FontSize="36" Text="{Binding Cases[3].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[3]}" />
+            <Button Grid.Row="1" Grid.Column="1" FontSize="36" Text="{Binding Cases[4].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[4]}" />
+            <Button Grid.Row="1" Grid.Column="2" FontSize="36" Text="{Binding Cases[5].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[5]}" />
+
+            <Button Grid.Row="2" Grid.Column="0" FontSize="36" Text="{Binding Cases[6].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[6]}" />
+            <Button Grid.Row="2" Grid.Column="1" FontSize="36" Text="{Binding Cases[7].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[7]}" />
+            <Button Grid.Row="2" Grid.Column="2" FontSize="36" Text="{Binding Cases[8].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[8]}" />
+        </Grid>
+
+        <Button Text="Rejouer"
+                Command="{Binding RejouerCommand}"
+                HorizontalOptions="Center"
+                WidthRequest="200"
+                Margin="0, 20, 0, 0"/>
+
+    </VerticalStackLayout>
+</ContentPage>
