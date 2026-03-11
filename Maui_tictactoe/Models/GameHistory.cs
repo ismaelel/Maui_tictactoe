@@ -1,35 +1,51 @@
-﻿using Microsoft.Maui.Storage;
+﻿using System.Threading.Tasks;
 
 namespace Maui_tictactoe.Models;
 
 public class GameHistory : IGameHistory
 {
-    public int Victoires { get; private set; }
-    public int Defaites { get; private set; }
-    public int Nuls { get; private set; }
+    private readonly MorpionDatabase _db;
+    private ScoreEntity _currentScore;
 
-    public GameHistory()
+    public int Victoires => _currentScore?.Victoires ?? 0;
+    public int Defaites => _currentScore?.Defaites ?? 0;
+    public int Nuls => _currentScore?.Nuls ?? 0;
+
+    public GameHistory(MorpionDatabase db)
     {
-        Victoires = Preferences.Get("Score_Victoires", 0);
-        Defaites = Preferences.Get("Score_Defaites", 0);
-        Nuls = Preferences.Get("Score_Nuls", 0);
+        _db = db;
+        Task.Run(async () => await ChargerScoresDepuisDB());
+    }
+
+    private async Task ChargerScoresDepuisDB()
+    {
+        _currentScore = await _db.GetScoreAsync();
     }
 
     public void AjouterVictoire()
     {
-        Victoires++;
-        Preferences.Set("Score_Victoires", Victoires);
+        if (_currentScore != null)
+        {
+            _currentScore.Victoires++;
+            Task.Run(() => _db.UpdateScoreAsync(_currentScore));
+        }
     }
 
     public void AjouterDefaite()
     {
-        Defaites++;
-        Preferences.Set("Score_Defaites", Defaites);
+        if (_currentScore != null)
+        {
+            _currentScore.Defaites++;
+            Task.Run(() => _db.UpdateScoreAsync(_currentScore));
+        }
     }
 
     public void AjouterNul()
     {
-        Nuls++;
-        Preferences.Set("Score_Nuls", Nuls);
+        if (_currentScore != null)
+        {
+            _currentScore.Nuls++;
+            Task.Run(() => _db.UpdateScoreAsync(_currentScore));
+        }
     }
 }
