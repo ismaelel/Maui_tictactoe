@@ -1,4 +1,4 @@
-﻿namespace Maui_tictactoe.Models; // Vérifie bien ton namespace
+﻿namespace Maui_tictactoe.Models;
 
 public class Plateau
 {
@@ -18,7 +18,6 @@ public class Plateau
                 _grille[i, j] = ' ';
     }
 
-    // lire une case 
     public char GetCase(int ligne, int colonne)
     {
         return _grille[ligne, colonne];

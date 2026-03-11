@@ -15,7 +15,6 @@ public class Jeu
 
     public bool JouerUnCoup(int ligne, int colonne)
     {
-        // partie finie
         if (Resultat != ' ') return false;
 
         bool coupValide = PlateauJeu.PlacerCoup(ligne, colonne, JoueurActuel);
@@ -28,10 +27,10 @@ public class Jeu
             {
                 JoueurActuel = (JoueurActuel == 'X') ? 'O' : 'X';
             }
-            return true; // c bon
+            return true;
         }
 
-        return false; // Case occupée
+        return false;
     }
 
     public void RelancerPartie()
