@@ -4,10 +4,6 @@
              xmlns:vm="clr-namespace:Maui_tictactoe.ViewModels"
              x:Class="Maui_tictactoe.MainPage">
 
-    <ContentPage.BindingContext>
-        <vm:JeuViewModel />
-    </ContentPage.BindingContext>
-
     <VerticalStackLayout Padding="30" Spacing="25" HorizontalOptions="Center" VerticalOptions="Center">
 
         <Label Text="{Binding StatutTexte}"
@@ -15,23 +11,25 @@
                FontAttributes="Bold"
                HorizontalOptions="Center" />
 
-        <Grid RowDefinitions="100, 100, 100"
-              ColumnDefinitions="100, 100, 100"
-              RowSpacing="5" ColumnSpacing="5"
-              HorizontalOptions="Center">
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="20" Margin="0, 0, 0, 20">
+            <Label Text="{Binding VictoiresUI, StringFormat='Victoires : {0}'}" TextColor="Green" FontAttributes="Bold" FontSize="18" />
+            <Label Text="{Binding DefaitesUI, StringFormat='Défaites : {0}'}" TextColor="Red" FontAttributes="Bold" FontSize="18" />
+            <Label Text="{Binding NulsUI, StringFormat='Nuls : {0}'}" TextColor="Gray" FontAttributes="Bold" FontSize="18" />
+        </HorizontalStackLayout>
 
-            <Button Grid.Row="0" Grid.Column="0" FontSize="36" Text="{Binding Cases[0].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[0]}" />
-            <Button Grid.Row="0" Grid.Column="1" FontSize="36" Text="{Binding Cases[1].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[1]}" />
-            <Button Grid.Row="0" Grid.Column="2" FontSize="36" Text="{Binding Cases[2].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[2]}" />
-
-            <Button Grid.Row="1" Grid.Column="0" FontSize="36" Text="{Binding Cases[3].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[3]}" />
-            <Button Grid.Row="1" Grid.Column="1" FontSize="36" Text="{Binding Cases[4].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[4]}" />
-            <Button Grid.Row="1" Grid.Column="2" FontSize="36" Text="{Binding Cases[5].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[5]}" />
-
-            <Button Grid.Row="2" Grid.Column="0" FontSize="36" Text="{Binding Cases[6].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[6]}" />
-            <Button Grid.Row="2" Grid.Column="1" FontSize="36" Text="{Binding Cases[7].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[7]}" />
-            <Button Grid.Row="2" Grid.Column="2" FontSize="36" Text="{Binding Cases[8].Symbole}" Command="{Binding JouerCommand}" CommandParameter="{Binding Cases[8]}" />
-        </Grid>
+        <CollectionView ItemsSource="{Binding Cases}" HorizontalOptions="Center" WidthRequest="310">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="5" HorizontalItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button FontSize="36" WidthRequest="100" HeightRequest="100"
+                            Text="{Binding Symbole}" 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:JeuViewModel}}, Path=JouerCommand}" 
+                            CommandParameter="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <Button Text="Rejouer"
                 Command="{Binding RejouerCommand}"
