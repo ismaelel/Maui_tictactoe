@@ -20,6 +20,7 @@ namespace Maui_tictactoe
 
             builder.Services.AddTransient<JeuViewModel>();
             builder.Services.AddTransient<MainPage>();
+            builder.Services.AddSingleton<MorpionDatabase>();
 
 #if DEBUG
             builder.Logging.AddDebug();
