@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="Maui_tictactoe.Tests/Maui_tictactoe.Tests.csproj" Id="370f12e6-f891-47eb-a38d-5289f57a181a" />
   <Project Path="Maui_tictactoe/Maui_tictactoe.csproj" />
 </Solution>
